@@ -20,7 +20,7 @@ The main aspects covered :
 - Implementation of basic endpoints (controller).
 
 Outstanding ..
-to complete the endpoints regarding reporting , order , products , more on documentation ..
+- to complete the endpoints regarding reporting , order , products , more on documentation ..
 - adding functionalty regarding deliverynotematching reporting .
 - more SQL queries to satify those above requirements.
 - finally a nice frontend to capture the jason output for display ..

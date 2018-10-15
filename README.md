@@ -14,7 +14,7 @@ The main aspects covered :
 - Validation & Custom Validator implementation.
 - Custom Exception handling.
 - Implementation of native SQL queries .
-- Documentation implementation using Swagger (More work required to document Entities). (http:localhost:8080/seagger-ui.html)
+- Documentation implementation using Swagger (More work required to document Entities). (http:localhost:8080/swagger-ui.html)
 - Unit test using Rest-Assured approach , Junit , Mockito & Postman.
 - lambda V8 (used in datasetup)
 - Implementation of basic endpoints (controller).

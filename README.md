@@ -10,15 +10,17 @@ The main aspects covered :
 - polymorphism (overriding methods, no overloading is relevant at the moment).
 - JPA - embedded entities (Address, productAttributes) , in embedeable entities , Customer & Product
 - JPA - Entity relationship.
+- h2 Memory DB ( see application.properties) ; name of db = sop
 - Validation & Custom Validator implementation.
 - Custom Exception handling.
 - Implementation of native SQL queries .
-- Documentation implementation using Swagger (More work required to document Entities).
+- Documentation implementation using Swagger (More work required to document Entities). (http:localhost:8080/seagger-ui.html)
 - Unit test using Rest-Assured approach , Junit , Mockito & Postman.
+- lambda V8 (used in datasetup)
 - Implementation of basic endpoints (controller).
 
 Outstanding ..
-to complete the endpoints regarding reporting , order , products ..
+to complete the endpoints regarding reporting , order , products , more on documentation ..
 - adding functionalty regarding deliverynotematching reporting .
 - more SQL queries to satify those above requirements.
 - finally a nice frontend to capture the jason output for display ..

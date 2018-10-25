@@ -9,8 +9,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
 @Entity
 @Data
 @NoArgsConstructor

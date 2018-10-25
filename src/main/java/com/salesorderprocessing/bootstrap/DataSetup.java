@@ -2,62 +2,33 @@ package com.salesorderprocessing.bootstrap;
 
 import com.salesorderprocessing.domain.*;
 import com.salesorderprocessing.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component
-public class DataSetup implements ApplicationListener<ContextRefreshedEvent> {
+@RequiredArgsConstructor
+public class DataSetup {
 
-    private CustomerService customerService;
-    private OrderHeaderService orderHeaderService;
-    private ProductService productService;
-    private InvoiceService invoiceService;
-    private ReturnService returnService;
-    private DeliveryService deliveryService;
+    private final CustomerService customerService;
+    private final OrderHeaderService orderHeaderService;
+    private final ProductService productService;
+    private final InvoiceService invoiceService;
+    private final ReturnService returnService;
+    private final DeliveryService deliveryService;
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    @PostConstruct
+    public void loadData() {
         loadProduct();
         loadCustomer();
         loadOrder();
     }
 
-    @Autowired
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
-    @Autowired
-    public void setOrderHeaderService(OrderHeaderService orderHeaderService) {
-        this.orderHeaderService = orderHeaderService;
-    }
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @Autowired
-    public void setInvoiceService(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
-    }
-
-    @Autowired
-    public void setReturnService(ReturnService returnService) {
-        this.returnService = returnService;
-    }
-
-    @Autowired
-    public void setDeliveryService(DeliveryService deliveryService) {
-        this.deliveryService = deliveryService;
-    }
-
-    public void loadProduct() {
+    private void loadProduct() {
         ProductAttribute productAttribute = new ProductAttribute();
         productAttribute.setColour("Blue");
         productAttribute.setSize(9.5);
@@ -199,7 +170,7 @@ public class DataSetup implements ApplicationListener<ContextRefreshedEvent> {
         productService.saveOrUpdate(product10);
     }
 
-    public void loadCustomer() {
+    private void loadCustomer() {
         Address address = new Address();
         address.setAddressLine1("Wisteria House");
         address.setAddressLine2("South End");
@@ -301,7 +272,7 @@ public class DataSetup implements ApplicationListener<ContextRefreshedEvent> {
         customerService.saveOrUpdate(customer4);
     }
 
-    public void loadOrder() {
+    private void loadOrder() {
 
         // Grab a handful of customers
         Customer customer = customerService.findByReference("001");

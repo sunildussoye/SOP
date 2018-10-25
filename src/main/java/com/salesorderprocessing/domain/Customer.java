@@ -51,7 +51,7 @@ public class Customer extends DomainBaseImpl {
     })
     Address customerAddress;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     @AttributeOverrides({
             @AttributeOverride(name = "addressLine1",column = @Column(name="Deliveryaddressline1")),
             @AttributeOverride(name = "addressLine2",column = @Column(name="Deliveryaddressline2")),

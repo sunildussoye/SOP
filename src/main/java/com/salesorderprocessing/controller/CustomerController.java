@@ -4,6 +4,7 @@ import com.salesorderprocessing.domain.Customer;
 import com.salesorderprocessing.exception.UserNotFoundException;
 import com.salesorderprocessing.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,19 +16,21 @@ import java.net.URI;
 @RestController
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(final CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping
     public Iterable<Customer> getAllCustomers() {
+        //use DTO
+        //use pagination
         return this.customerService.listAll();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable(value = "id") Integer cId) {
 
         Customer c = customerService.getById(cId);
@@ -37,24 +40,29 @@ public class CustomerController {
         return ResponseEntity.ok().body(c);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable(value = "id") Integer cId) {
 
         Customer c = customerService.getById(cId);
+        //move this check in the service and use Exception handler
         if (c == null) {
             throw new UserNotFoundException("id" + cId);
         }
+        //should return ACCEPTED(202) not OK(200)
         customerService.delete(cId);
     }
 
     // @Valid = validation on the object
-    @PostMapping("/create")
-    public ResponseEntity<Object> createCustomer(@Valid @RequestBody Customer client) {
-        Customer savedClient = customerService.saveOrUpdate(client);
+    @PostMapping
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer client) {
+       /* Customer savedClient = customerService.saveOrUpdate(client);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedClient.getId()).toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).build();*/
+
+       client = customerService.saveOrUpdate(client);
+       return ResponseEntity.created()
     }
 
 }

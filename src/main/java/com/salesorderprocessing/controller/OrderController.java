@@ -3,11 +3,12 @@ package com.salesorderprocessing.controller;
 import com.salesorderprocessing.domain.OrderHeader;
 import com.salesorderprocessing.service.OrderHeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/order")
+@RequestMapping("/order/id")
 @RestController
 public class OrderController {
 
@@ -18,7 +19,8 @@ public class OrderController {
         this.orderHeaderService = orderService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    //pagination ?
+    @GetMapping
     public Iterable<OrderHeader> getAllOrders() {
         return this.orderHeaderService.listAll();
     }
